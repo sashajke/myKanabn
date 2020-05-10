@@ -72,5 +72,64 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             return toReturn;
         }
 
+        public Response RemoveColumn(string email, int columnOrdinal)
+        {
+            Response toReturn;
+            try
+            {
+                boardController.RemoveColumn(email, columnOrdinal);
+                toReturn = new Response();
+            }
+            catch(Exception ee)
+            {
+                toReturn = new Response(ee.Message);
+            }
+            return toReturn;
+        }
+        public Response<Column> AddColumn(string email, int columnOrdinal, string Name)
+        {
+            Response<Column> toReturn;
+            try
+            {
+                Column columnService = new Column(boardController.AddColumn(email, columnOrdinal, Name));
+                toReturn = new Response<Column>(columnService);
+            }
+            catch(Exception ee)
+            {
+                toReturn = new Response<Column>(ee.Message);
+            }
+            return toReturn;
+        }
+        public Response<Column> MoveColumnRight(string email, int columnOrdinal)
+        {
+            Response<Column> toReturn;
+            try
+            {
+                Column columnService = new Column(boardController.MoveColumnRight(email, columnOrdinal));
+                toReturn = new Response<Column>(columnService);
+            }
+            catch(Exception ee)
+            {
+                toReturn = new Response<Column>(ee.Message);
+            }
+            return toReturn;
+        }
+
+        public Response<Column> MoveColumnLeft(string email, int columnOrdinal)
+        {
+            Response<Column> toReturn;
+            try
+            {
+                Column columnService = new Column(boardController.MoveColumnLeft(email, columnOrdinal));
+                toReturn = new Response<Column>(columnService);
+            }
+            catch (Exception ee)
+            {
+                toReturn = new Response<Column>(ee.Message);
+            }
+            return toReturn;
+        }
     }
+
+   
 }

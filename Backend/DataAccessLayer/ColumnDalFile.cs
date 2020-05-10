@@ -1,4 +1,5 @@
 ﻿using IntroSE.Kanban.Backend.Common;
+using IntroSE.Kanban.Backend.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
 
-    public class ColumnWrapper:DalObject<ColumnWrapper>
+    public class ColumnWrapper : DalObject<ColumnWrapper>,IColumnDAL
     {
 
         public ColumnStatus Status { get; set; }

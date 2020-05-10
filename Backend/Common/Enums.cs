@@ -12,4 +12,9 @@ namespace IntroSE.Kanban.Backend.Common
         InProgress,
         Done
     }
+    public enum SavingSystem
+    {
+        File,
+        DB
+    }
 }

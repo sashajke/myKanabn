@@ -9,6 +9,8 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 {
     public class Board
     {
+        private const int maxLenghDescription = 300;
+        private const int maxLenghTitle = 50;
         private List<Column> columns;
         private string email;
         private List<string> columnNames;
@@ -62,7 +64,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 throw new Exception("due date not valid");
             int ID = getNextID();
             if (!this.GetColumn(0).addTask(new Task(ID, title, des, this.email, dueDate)))
-                throw new Exception("backlog culumn has reached to the limit");
+                throw new Exception("leftmost culumn has reached its maximum amount of tasks allowed limit");
             return this.columns[0].GetTaskByID(ID);
         }
         private int getNextID()

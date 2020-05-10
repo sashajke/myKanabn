@@ -25,7 +25,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.nickname = nickname;
         }
         public User() { }
-        public User(UserWrapper user, Board board, List<string> columnNames)
+        public User(UserDalFile user, Board board, List<string> columnNames)
         {
             _isLogged = user.IsLogged;
             _board = board;
@@ -103,9 +103,9 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             }
         }
 
-        public DataAccessLayer.UserWrapper ToDalObject()
+        public DataAccessLayer.UserDalFile ToDalObject()
         {
-            return new DataAccessLayer.UserWrapper(email, password, nickname, _isLogged);
+            return new DataAccessLayer.UserDalFile(email, password, nickname, _isLogged);
         }
         public void save()
         {            

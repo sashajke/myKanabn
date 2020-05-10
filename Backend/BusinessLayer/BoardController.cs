@@ -58,5 +58,22 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             var readOnlyNames = new ReadOnlyCollection<string>(check.Board.ColumnNames);
             return readOnlyNames;
         }
+
+        public void RemoveColumn(string email, int columnOrdinal)
+        {
+            // need to implement
+        }
+        public Column AddColumn(string email, int columnOrdinal, string Name)
+        {
+            return new Column(); // need to implement
+        }
+        public Column MoveColumnRight(string email, int columnOrdinal)
+        {
+            return new Column(); // need to implement
+        }
+        public Column MoveColumnLeft(string email, int columnOrdinal)
+        {
+            return new Column(); // need to implement
+        }
     }
 }

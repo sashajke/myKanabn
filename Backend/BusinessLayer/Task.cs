@@ -14,7 +14,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         private int id;
         private string title;
         private string description;
-        private ColumnStatus status = ColumnStatus.Backlog;
+        private ColumnStatus status = ColumnStatus.Backlog; // need to change
         private string email;
         private DateTime creationtime;
         private DateTime dueDate;

@@ -1,4 +1,5 @@
-﻿using IntroSE.Kanban.Backend.DataAccessLayer;
+﻿using IntroSE.Kanban.Backend.Common;
+using IntroSE.Kanban.Backend.DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,8 +18,13 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 
         public UserController()
         {
+            Factory.CurrentConfig = SavingSystem.File;
             this.users = new List<User>();
             this.currentUser = null;
+        }
+        static UserController()
+        {
+
         }
         public User GetUser(string email)
         {
@@ -81,7 +87,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 throw new Exception("password cant be null or empty");
             if (password.Contains(' '))
                 throw new Exception("password can't contain spaces");
-            if (password.Length < 4 || password.Length > 20)
+            if (password.Length < 5 || password.Length > 25)
                 throw new Exception("Password must be between 4 and 20 characters long");
             bool PasswordValidation = (password.Where(Char.IsUpper).Count() == 0) || (password.Where(Char.IsLower).Count() == 0) || (password.Where(Char.IsDigit).Count() == 0);
             if (PasswordValidation)

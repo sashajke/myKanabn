@@ -11,11 +11,11 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     {
 
 
-        public List<TaskWrapper> Tasks { get ; set ; }
+        public List<TaskDalFile> Tasks { get ; set ; }
 
         public TaskControllerWrapper()
         {
-            Tasks = new List<TaskWrapper>();
+            Tasks = new List<TaskDalFile>();
         }
         public override void Save()
         {
@@ -31,13 +31,13 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public bool LoadAsSeperateFiles()
         {
             if (Tasks == null)
-                Tasks = new List<TaskWrapper>();
+                Tasks = new List<TaskDalFile>();
             Tasks.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
-                    TaskWrapper toLoad = FromJson<TaskWrapper>(item);
+                    TaskDalFile toLoad = FromJson<TaskDalFile>(item);
                     Tasks.Add(toLoad);
                 }
                 catch(Exception ee)

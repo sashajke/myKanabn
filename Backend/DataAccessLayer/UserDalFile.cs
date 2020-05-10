@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntroSE.Kanban.Backend.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
-    public class UserWrapper:DalObject<UserWrapper>
+    public class UserDalFile:DalObject<UserDalFile>, IUserDAL
     {
-        public UserWrapper(string email, string password, string nickname,bool isLogged)
+        public UserDalFile(string email, string password, string nickname,bool isLogged)
         {
             IsLogged = isLogged;
             Email = email;
             Password = password;
             Nickname = nickname;
         }
-        public UserWrapper() { }
+        public UserDalFile() { }
         public string Email { get ; set ; }
         public string Password { get; set; }
         public string Nickname { get; set; }
@@ -29,11 +30,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         }
         public bool Load(string email)
         {
-            UserWrapper toLoad = null;
+            UserDalFile toLoad = null;
             try
             {
                 toLoad = FromJson(GetFileName(email));
-
             }
             catch(Exception ee)
             {
