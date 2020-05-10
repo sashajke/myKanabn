@@ -9,8 +9,6 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 {
     public class Board
     {
-        private const int maxLenghDescription = 300;
-        private const int maxLenghTitle = 50;
         private List<Column> columns;
         private string email;
         private List<string> columnNames;
