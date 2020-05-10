@@ -1,5 +1,4 @@
-﻿using IntroSE.Kanban.Backend.BusinessLayer;
-using System;
+﻿using System;
 
 namespace IntroSE.Kanban.Backend.ServiceLayer
 {
@@ -14,15 +13,13 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
     /// </summary>
     public class Service : IService
     {
-        private UserService _UserService;
-        private TaskService _TaskService;
-        private BoardService _BoardService;
+
         /// <summary>
         /// Simple public constructor.
         /// </summary>
         public Service()
         {
-            
+            throw new NotImplementedException();
         }
                
         /// <summary>        
@@ -31,31 +28,27 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error.</returns>
         public Response LoadData()
         {
-            BusinessLayer.UserController us = new UserController();
-            _UserService = new UserService(us);
-            _TaskService = new TaskService(us);
-            _BoardService = new BoardService(us);
-            return _UserService.loadData();
+            throw new NotImplementedException();
         }
-       
-        /// <summary>
-        /// Registers a new user
-        /// </summary>
-        /// <param name="email">The email address of the user to register</param>
-        /// <param name="password">The password of the user to register</param>
-        /// <param name="nickname">The nickname of the user to register</param>
-        /// <returns>A response object. The response should contain a error message in case of an error<returns>
-        public Response Register(string email, string password, string nickname)
-        {
-            try
-            {
-                return _UserService.Register(email, password, nickname);
 
-            }
-            catch(Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+
+        ///<summary>Remove all persistent data.</summary>
+        public Response DeleteData()
+        {
+            throw new NotImplementedException();
+        }
+
+
+    /// <summary>
+    /// Registers a new user
+    /// </summary>
+    /// <param name="email">The email address of the user to register</param>
+    /// <param name="password">The password of the user to register</param>
+    /// <param name="nickname">The nickname of the user to register</param>
+    /// <returns>A response object. The response should contain a error message in case of an error<returns>
+    public Response Register(string email, string password, string nickname)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -66,15 +59,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object with a value set to the user, instead the response should contain a error message in case of an error</returns>
         public Response<User> Login(string email, string password)
         {
-            try
-            {
-                return _UserService.Login(email, password);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response<User>("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>        
@@ -84,15 +69,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response Logout(string email)
         {
-            try
-            {
-                return _UserService.Logout(email);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -102,16 +79,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object with a value set to the board, instead the response should contain a error message in case of an error</returns>
         public Response<Board> GetBoard(string email)
         {
-            try
-            {
-                return _BoardService.GetBoard(email);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response<Board>("didn't execute LoadData function");
-            }
-            
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -123,15 +91,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response LimitColumnTasks(string email, int columnOrdinal, int limit)
         {
-            try
-            {
-                return _BoardService.LimitColumnTasks(email, columnOrdinal, limit);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -144,15 +104,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object with a value set to the Task, instead the response should contain a error message in case of an error</returns>
         public Response<Task> AddTask(string email, string title, string description, DateTime dueDate)
         {
-            try
-            {
-                return _TaskService.AddTask(email, title, description, dueDate);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response<Task>("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -165,15 +117,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response UpdateTaskDueDate(string email, int columnOrdinal, int taskId, DateTime dueDate)
         {
-            try
-            {
-                return _TaskService.UpdateTaskDueDate(email, columnOrdinal, taskId, dueDate);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -186,15 +130,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response UpdateTaskTitle(string email, int columnOrdinal, int taskId, string title)
         {
-            try
-            {
-                return _TaskService.UpdateTaskTitle(email, columnOrdinal, taskId, title);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -207,15 +143,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response UpdateTaskDescription(string email, int columnOrdinal, int taskId, string description)
         {
-            try
-            {
-                return _TaskService.UpdateTaskDescription(email, columnOrdinal, taskId, description);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -227,15 +155,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object. The response should contain a error message in case of an error</returns>
         public Response AdvanceTask(string email, int columnOrdinal, int taskId)
         {
-            try
-            {
-                return _TaskService.AdvanceTask(email, columnOrdinal, taskId);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
 
@@ -247,15 +167,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <returns>A response object with a value set to the Column, The response should contain a error message in case of an error</returns>
         public Response<Column> GetColumn(string email, string columnName)
         {
-            try
-            {
-                return _BoardService.GetColumn(email, columnName);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response<Column>("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -268,15 +180,60 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
 
         public Response<Column> GetColumn(string email, int columnOrdinal)
         {
-            try
-            {
-                return _BoardService.GetColumn(email, columnOrdinal);
-
-            }
-            catch (Exception ee)
-            {
-                return new Response<Column>("didn't execute LoadData function");
-            }
+            throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Removes a column given it's identifier.
+        /// The first column is identified by 0, the ID increases by 1 for each column
+        /// </summary>
+        /// <param name="email">Email of the user. Must be logged in</param>
+        /// <param name="columnOrdinal">Column ID</param>
+        /// <returns>A response object. The response should contain a error message in case of an error</returns>
+        public Response RemoveColumn(string email, int columnOrdinal)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Adds a new column, given it's name and a location to place it.
+        /// The first column is identified by 0, the ID increases by 1 for each column        
+        /// </summary>
+        /// <param name="email">Email of the user. Must be logged in</param>
+        /// <param name="columnOrdinal">Location to place to column</param>
+        /// <param name="Name">new Column name</param>
+        /// <returns>A response object with a value set to the new Column, the response should contain a error message in case of an error</returns>
+        public Response<Column> AddColumn(string email, int columnOrdinal, string Name)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        /// <summary>
+        /// Moves a column to the right, swapping it with the column wich is currently located there.
+        /// The first column is identified by 0, the ID increases by 1 for each column        
+        /// </summary>
+        /// <param name="email">Email of the user. Must be logged in</param>
+        /// <param name="columnOrdinal">Current location of the column</param>
+        /// <returns>A response object with a value set to the moved Column, the response should contain a error message in case of an error</returns>
+        public Response<Column> MoveColumnRight(string email, int columnOrdinal)
+        {
+            throw new NotImplementedException();
+
+        }
+
+        /// <summary>
+        /// Moves a column to the left, swapping it with the column wich is currently located there.
+        /// The first column is identified by 0, the ID increases by 1 for each column.
+        /// </summary>
+        /// <param name="email">Email of the user. Must be logged in</param>
+        /// <param name="columnOrdinal">Current location of the column</param>
+        /// <returns>A response object with a value set to the moved Column, the response should contain a error message in case of an error</returns>
+        public Response<Column> MoveColumnLeft(string email, int columnOrdinal)
+        {
+            throw new NotImplementedException();
+
+        }
+
     }
 }
