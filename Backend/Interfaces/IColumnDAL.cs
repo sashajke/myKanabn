@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.Interfaces
 {
-    interface IColumnDAL
+    public interface IColumnDAL
     {
         void Save();
         bool Load(string email, ColumnStatus status);      

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.Interfaces
 {
-    interface IBoardDAL
+    public interface IBoardDAL
     {
     }
 }

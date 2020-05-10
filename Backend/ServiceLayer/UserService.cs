@@ -10,11 +10,11 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         {
             _UserController = controller;
         }
-        public Response Save()
-        {
-             _UserController.saveAll();
-            return new Response();
-        }
+        //public Response Save()
+        //{
+        //     _UserController.saveAll();
+        //    return new Response();
+        //}
         public Response loadData()
         {
             _UserController.LoadData();

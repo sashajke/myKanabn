@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IntroSE.Kanban.Backend.DataAccessLayer;
+using IntroSE.Kanban.Backend.Interfaces;
 
 namespace IntroSE.Kanban.Backend.BusinessLayer
 {
@@ -103,9 +104,10 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             }
         }
 
-        public DataAccessLayer.UserDalFile ToDalObject()
+        public IUserDAL ToDalObject()
         {
-            return new DataAccessLayer.UserDalFile(email, password, nickname, _isLogged);
+            return Factory.CreateUserDalImpl();
+           // return new DataAccessLayer.UserDalFile(email, password, nickname, _isLogged);
         }
         public void save()
         {            

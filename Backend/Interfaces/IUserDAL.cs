@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.Interfaces
 {
-    interface IUserDAL
+    public interface IUserDAL
     {
         void Save();
         bool Load(string email);

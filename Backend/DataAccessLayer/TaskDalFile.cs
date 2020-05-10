@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 using IntroSE.Kanban.Backend.Common;
+using IntroSE.Kanban.Backend.Interfaces;
 
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
-    public class TaskWrapper: DalObject<TaskWrapper>
+    public class TaskDalFile: DalObject<TaskDalFile>, ITaskDAL
     {
 
         public ColumnStatus Status { get; set; }
@@ -20,8 +21,8 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public string Email { get; set; }
         public DateTime Creationtime { get; set; }
         public DateTime DueDate { get; set; }
-        public TaskWrapper() { }
-        public TaskWrapper(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate,ColumnStatus status)
+        public TaskDalFile() { }
+        public TaskDalFile(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate,ColumnStatus status)
         {
             Id = id;
             Title = title;
@@ -42,7 +43,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         }
         public bool Load(string email,ColumnStatus status,int id)
         {
-            TaskWrapper toLoad = null;
+            TaskDalFile toLoad = null;
             try
             {
                 toLoad = FromJson(GetFileName(email,id));

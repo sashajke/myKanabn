@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
 
-    public class ColumnWrapper : DalObject<ColumnWrapper>,IColumnDAL
+    public class ColumnDalFile : DalObject<ColumnDalFile>,IColumnDAL
     {
 
         public ColumnStatus Status { get; set; }
@@ -18,10 +18,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public int Limit { get; set; }
         public string Email { get; set; }
 
-        public ColumnWrapper()
+        public ColumnDalFile()
         {
         }
-        public ColumnWrapper(int limit,string email, ColumnStatus status)
+        public ColumnDalFile(int limit,string email, ColumnStatus status)
         {
             Email = email;
             switch (status)
@@ -49,10 +49,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         }
         public bool Load(string email, ColumnStatus status)
         {
-            ColumnWrapper toLoad = null;
+            ColumnDalFile toLoad = null;
             try
             {
-                toLoad = FromJson<ColumnWrapper>(GetFileName(email,status));
+                toLoad = FromJson<ColumnDalFile>(GetFileName(email,status));
 
             }
             catch (Exception ee)

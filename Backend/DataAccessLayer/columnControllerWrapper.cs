@@ -11,11 +11,11 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     {
 
 
-        public List<ColumnWrapper> Columns { get ; set ; }
+        public List<ColumnDalFile> Columns { get ; set ; }
 
         public ColumnControllerWrapper()
         {
-            Columns = new List<ColumnWrapper>();
+            Columns = new List<ColumnDalFile>();
         }
         public void SaveAsSeperateFiles()
         {
@@ -27,13 +27,13 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public bool LoadAsSeperateFiles()
         {
             if (Columns == null)
-                Columns = new List<ColumnWrapper>();
+                Columns = new List<ColumnDalFile>();
             Columns.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
-                    ColumnWrapper toLoad = FromJson<ColumnWrapper>(item);
+                    ColumnDalFile toLoad = FromJson<ColumnDalFile>(item);
                     Columns.Add(toLoad);
                 }
                 catch(Exception ee)

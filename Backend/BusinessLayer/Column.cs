@@ -1,4 +1,6 @@
 ﻿using IntroSE.Kanban.Backend.Common;
+using IntroSE.Kanban.Backend.DataAccessLayer;
+using IntroSE.Kanban.Backend.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +44,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         {
 
         }
-        public Column(DataAccessLayer.ColumnWrapper toCopy,List<Task> tasks)
+        public Column(DataAccessLayer.ColumnDalFile toCopy,List<Task> tasks)
         {
             if (toCopy == null)
                 return;
@@ -125,9 +127,10 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             throw new Exception("There is no Task");
         }
         //override
-        public DataAccessLayer.ColumnWrapper ToDalObject()
+        public IColumnDAL ToDalObject()
         {
-            return new DataAccessLayer.ColumnWrapper(this.limit,this.email, this.status);
+            return Factory.CreateColumnDalImpl();
+            //return new DataAccessLayer.ColumnDalFile(this.limit,this.email, this.status);
         }
         public void save()
         {

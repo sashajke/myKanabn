@@ -168,38 +168,39 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 users = new List<User>();
             }          
         }
-        public void save()
-        {
-            DataAccessLayer.userControllerWrapper wrapper = new userControllerWrapper();
-            List<DataAccessLayer.UserWrapper> usersWrapper = new List<UserWrapper>();
-            foreach (var item in users)
-            {
-                usersWrapper.Add(item.ToDalObject());
-            }
-            wrapper.Users = usersWrapper;
-            wrapper.Save();
-        }
-        public void saveAll()
-        {
-            DataAccessLayer.TaskControllerWrapper taskWrapper = new TaskControllerWrapper();
-            DataAccessLayer.ColumnControllerWrapper columnWrapper = new ColumnControllerWrapper();
-            DataAccessLayer.userControllerWrapper userWrapepr = new userControllerWrapper();
-            foreach (var user in users)
-            {
-                userWrapepr.Users.Add(user.ToDalObject());
-                foreach (var column in user.Board.Columns)
-                {
-                    columnWrapper.Columns.Add(column.ToDalObject());
-                    foreach (var task in column.TaskByID)
-                    {
-                        taskWrapper.Tasks.Add(task.ToDalObject());
-                    }
-                }
-            }
-            taskWrapper.SaveAsSeperateFiles();
-            columnWrapper.SaveAsSeperateFiles();
-            userWrapepr.SaveAsSeperateFiles();
-        }
+        //public void save()
+        //{
+        //    DataAccessLayer.userControllerWrapper wrapper = new userControllerWrapper();
+        //    List<DataAccessLayer.UserDalFile> usersWrapper = new List<UserDalFile>();
+        //    foreach (var item in users)
+        //    {
+        //        usersWrapper.Add(item.ToDalObject());
+        //    }
+        //    wrapper.Users = usersWrapper;
+        //    wrapper.Save();
+        //}
+
+        //public void saveAll()
+        //{
+        //    DataAccessLayer.TaskControllerWrapper taskWrapper = new TaskControllerWrapper();
+        //    DataAccessLayer.ColumnControllerWrapper columnWrapper = new ColumnControllerWrapper();
+        //    DataAccessLayer.userControllerWrapper userWrapepr = new userControllerWrapper();
+        //    foreach (var user in users)
+        //    {
+        //        userWrapepr.Users.Add(user.ToDalObject());
+        //        foreach (var column in user.Board.Columns)
+        //        {
+        //            columnWrapper.Columns.Add(column.ToDalObject());
+        //            foreach (var task in column.TaskByID)
+        //            {
+        //                taskWrapper.Tasks.Add(task.ToDalObject());
+        //            }
+        //        }
+        //    }
+        //    taskWrapper.SaveAsSeperateFiles();
+        //    columnWrapper.SaveAsSeperateFiles();
+        //    userWrapepr.SaveAsSeperateFiles();
+        //}
         public void LoadAll()
         {
             if (users == null)
@@ -217,14 +218,14 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 
                 List<string> columnNames = new List<string>();
                 List<Column> bussinesColumns = new List<Column>();
-                List<ColumnWrapper> columsToBeAdded = columnWrapper.Columns.FindAll(column => column.Email == user.Email);
+                List<ColumnDalFile> columsToBeAdded = columnWrapper.Columns.FindAll(column => column.Email == user.Email);
                 columsToBeAdded.Sort((a, b) => (a.Status.CompareTo(b.Status)));
                 foreach (var column in columsToBeAdded)
                 {
                     boardNames.Add(column.Name);
                     columnNames.Add(column.Name);
 
-                    List<TaskWrapper> tasksToBeAdded = taskWrapper.Tasks.FindAll(task => task.Email == column.Email && task.Status == column.Status);
+                    List<TaskDalFile> tasksToBeAdded = taskWrapper.Tasks.FindAll(task => task.Email == column.Email && task.Status == column.Status);
                     List<Task> bussinesTasks = new List<Task>();
                     foreach (var task in tasksToBeAdded)
                     {

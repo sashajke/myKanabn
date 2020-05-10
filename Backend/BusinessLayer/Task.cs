@@ -1,4 +1,6 @@
 ﻿using IntroSE.Kanban.Backend.Common;
+using IntroSE.Kanban.Backend.DataAccessLayer;
+using IntroSE.Kanban.Backend.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             save(); 
         }
         public Task() { }
-        public Task(DataAccessLayer.TaskWrapper toCopy)
+        public Task(DataAccessLayer.TaskDalFile toCopy)
         {
             if (toCopy == null)
                 return;
@@ -91,15 +93,17 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             save();
             return true;
         }
-        public DataAccessLayer.TaskWrapper ToDalObject()
+        public ITaskDAL ToDalObject()
         {
-            return new DataAccessLayer.TaskWrapper(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
+            return Factory.CreateTaskDalImpl();
+          
+            // return new DataAccessLayer.TaskDalFile(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
         }
         public void save()
         {
             this.ToDalObject().Save();
         }
-        public void Load(DataAccessLayer.TaskWrapper taskWrap)
+        public void Load(DataAccessLayer.TaskDalFile taskWrap)
         {
             this.creationtime = taskWrap.Creationtime;
             this.description = taskWrap.Description;

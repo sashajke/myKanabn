@@ -11,11 +11,11 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     {
 
 
-        public List<UserWrapper> Users { get ; set ; }
+        public List<UserDalFile> Users { get ; set ; }
 
         public userControllerWrapper()
         {
-            Users = new List<UserWrapper>();
+            Users = new List<UserDalFile>();
         }
 
         public void SaveAsSeperateFiles()
@@ -28,13 +28,13 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public bool LoadAsSeperateFiles()
         {
             if (Users == null)
-                Users = new List<UserWrapper>();
+                Users = new List<UserDalFile>();
             Users.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
-                    UserWrapper toLoad = FromJson<UserWrapper>(item);
+                    UserDalFile toLoad = FromJson<UserDalFile>(item);
                     Users.Add(toLoad);
                 }
                 catch(Exception ee)
