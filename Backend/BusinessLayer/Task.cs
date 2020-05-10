@@ -95,7 +95,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         }
         public ITaskDAL ToDalObject()
         {
-            return Factory.CreateTaskDalImpl();
+            return Factory.CreateTaskDalImpl(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
           
             // return new DataAccessLayer.TaskDalFile(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
         }

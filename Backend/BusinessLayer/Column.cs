@@ -129,7 +129,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         //override
         public IColumnDAL ToDalObject()
         {
-            return Factory.CreateColumnDalImpl();
+            return Factory.CreateColumnDalImpl(this.limit, this.email, this.status);
             //return new DataAccessLayer.ColumnDalFile(this.limit,this.email, this.status);
         }
         public void save()

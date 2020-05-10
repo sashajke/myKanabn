@@ -106,7 +106,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 
         public IUserDAL ToDalObject()
         {
-            return Factory.CreateUserDalImpl();
+            return Factory.CreateUserDalImpl(email, password, nickname, _isLogged);
            // return new DataAccessLayer.UserDalFile(email, password, nickname, _isLogged);
         }
         public void save()

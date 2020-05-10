@@ -12,22 +12,22 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     {
         public static SavingSystem CurrentConfig { get; set; }
 
-        public static IUserDAL CreateUserDalImpl()
+        public static IUserDAL CreateUserDalImpl(string email, string password, string nickname, bool isLogged)
         {
             if (CurrentConfig == SavingSystem.File)
-                return new UserDalFile();
+                return new UserDalFile(email,password,nickname,isLogged);
             return new UserDalDB();
         }
-        public static ITaskDAL CreateTaskDalImpl()
+        public static ITaskDAL CreateTaskDalImpl(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate, ColumnStatus status)
         {
             if (CurrentConfig == SavingSystem.File)
-                return new TaskDalFile();
+                return new TaskDalFile(id,title,description,email,creationtime,dueDate,status);
             return new TaskDalDB();
         }
-        public static IColumnDAL CreateColumnDalImpl()
+        public static IColumnDAL CreateColumnDalImpl(int limit, string email, ColumnStatus status)
         {
             if (CurrentConfig == SavingSystem.File)
-                return new ColumnDalFile();
+                return new ColumnDalFile(limit,email,status);
             return new ColumnDalDB();
         }
         public static IBoardDAL CreateBoardDalImpl()

@@ -31,6 +31,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         public Response LoadData()
         {
             BusinessLayer.UserController us = new UserController();
+            _UserService = new UserService(us);
             _TaskService = new TaskService(us);
             _BoardService = new BoardService(us);
             return _UserService.loadData();
