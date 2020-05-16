@@ -31,7 +31,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         {
             User check = _userController.GetUser(email);
             validUser(check);
-            if (columnOrdinal == 0 || columnOrdinal == 2)
+            if (columnOrdinal == 0 || columnOrdinal == check.Board.Columns.Count-1)
                 throw new Exception("can't update backlog or done column limit");
             if (!(check.Board.GetColumn(columnOrdinal).updateLimit(limit)))
                 throw new Exception("limit must be positive");
@@ -61,19 +61,36 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 
         public void RemoveColumn(string email, int columnOrdinal)
         {
-            // need to implement
+            User check = _userController.GetUser(email);
+            if (!validUser(check))
+                return;
+            Board userBoard = check.Board;
+            userBoard.RemoveColumn(columnOrdinal);
         }
         public Column AddColumn(string email, int columnOrdinal, string Name)
         {
-            return new Column(); // need to implement
+            User check = _userController.GetUser(email);
+            if (!validUser(check))
+                return null;
+            Board userBoard = check.Board;
+            return userBoard.AddColumn(columnOrdinal); // need to implement
         }
         public Column MoveColumnRight(string email, int columnOrdinal)
         {
-            return new Column(); // need to implement
+            User check = _userController.GetUser(email);
+            if (!validUser(check))
+                return null;
+            Board userBoard = check.Board;
+            return userBoard.MoveColumnRight(columnOrdinal)
+                // need to implement
         }
         public Column MoveColumnLeft(string email, int columnOrdinal)
         {
-            return new Column(); // need to implement
+            User check = _userController.GetUser(email);
+            if (!validUser(check))
+                return null;
+            Board userBoard = check.Board;
+            return userBoard.MoveColumnLeft(columnOrdinal)
         }
     }
 }

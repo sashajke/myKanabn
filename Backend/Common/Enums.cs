@@ -10,7 +10,8 @@ namespace IntroSE.Kanban.Backend.Common
     {
         Backlog,
         InProgress,
-        Done
+        Done,
+        Unknown
     }
     public enum SavingSystem
     {

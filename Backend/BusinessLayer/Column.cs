@@ -16,12 +16,14 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         private List<Task> taskByID;
         private ColumnStatus status;
         private string email;
+        private int orderID;
 
-        public Column(ColumnStatus status,string email)
+        public Column(ColumnStatus status,string email,int id=-1)
         {
             this.email = email;
             this.limit = -1;
             this.taskByID = new List<Task>();
+            this.orderID = id;
             switch (status)
             {
                 case ColumnStatus.Backlog:
@@ -34,6 +36,10 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                     this.name = "done";
 
                     break;
+                case ColumnStatus.Unknown:
+                    this.name = "unknown";
+                    break;
+
                 default:
                     break;
             }
@@ -42,9 +48,13 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         }
         public Column()
         {
-
+            this.email = "";
+            this.limit = -1;
+            this.taskByID = new List<Task>();
+            this.orderID = -1;
+            this.status = ColumnStatus.Unknown;
         }
-        public Column(DataAccessLayer.ColumnDalFile toCopy,List<Task> tasks)
+        public Column(IColumnDAL toCopy,List<Task> tasks)
         {
             if (toCopy == null)
                 return;
@@ -64,9 +74,22 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 default:
                     break;
             }
+            this.orderID = toCopy.OrderID;
             this.limit = toCopy.Limit;
             this.status = toCopy.Status;
             this.taskByID = tasks;
+        }
+        public int OrderID
+        {
+            get => orderID;
+            set
+            {
+                if(orderID != value)
+                {
+                    orderID = value;
+                    save();
+                }
+            }
         }
         public int Limit {
             get => limit;

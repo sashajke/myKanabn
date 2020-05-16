@@ -32,8 +32,8 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         }
         public static IBoardDAL CreateBoardDalImpl()
         {
-            //if (CurrentConfig == SavingSystem.File)
-            //    return new BoardDalFile();
+            if (CurrentConfig == SavingSystem.File)
+                return null;
             return new BoardDalDB();
         }
 

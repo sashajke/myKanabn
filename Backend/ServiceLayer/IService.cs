@@ -151,7 +151,5 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// <param name="columnOrdinal">Current location of the columns</param>
         /// <returns>A response object with a value set to the column, the response should contain a error message in case of an error</returns>
         Response<Column> MoveColumnLeft(string email, int columnOrdinal);
-
-
     }
 }

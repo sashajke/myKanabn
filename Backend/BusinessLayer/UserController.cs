@@ -88,7 +88,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             if (password.Contains(' '))
                 throw new Exception("password can't contain spaces");
             if (password.Length < 5 || password.Length > 25)
-                throw new Exception("Password must be between 4 and 20 characters long");
+                throw new Exception("Password must be between 5 and 25 characters long");
             bool PasswordValidation = (password.Where(Char.IsUpper).Count() == 0) || (password.Where(Char.IsLower).Count() == 0) || (password.Where(Char.IsDigit).Count() == 0);
             if (PasswordValidation)
                 throw new Exception("Password must contain at least one lower case letter , one upper case letter and one number");
