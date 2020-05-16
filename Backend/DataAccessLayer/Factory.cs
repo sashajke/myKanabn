@@ -18,24 +18,24 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
                 return new UserDalFile(email,password,nickname,isLogged);
             return new UserDalDB();
         }
-        public static ITaskDAL CreateTaskDalImpl(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate, ColumnStatus status)
+        public static ITaskDAL CreateTaskDalImpl(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate, int columnID)
         {
             if (CurrentConfig == SavingSystem.File)
-                return new TaskDalFile(id,title,description,email,creationtime,dueDate,status);
+                return new TaskDalFile(id,title,description,email,creationtime,dueDate, columnID);
             return new TaskDalDB();
         }
-        public static IColumnDAL CreateColumnDalImpl(int limit, string email, ColumnStatus status)
+        public static IColumnDAL CreateColumnDalImpl(int limit, string email, int columnID,string name)
         {
             if (CurrentConfig == SavingSystem.File)
-                return new ColumnDalFile(limit,email,status);
+                return new ColumnDalFile(limit,email, columnID,name);
             return new ColumnDalDB();
         }
-        public static IBoardDAL CreateBoardDalImpl()
-        {
-            if (CurrentConfig == SavingSystem.File)
-                return null;
-            return new BoardDalDB();
-        }
+        //public static IBoardDAL CreateBoardDalImpl()
+        //{
+        //    if (CurrentConfig == SavingSystem.File)
+        //        return null;
+        //    return new BoardDalDB();
+        //}
 
     }
 }

@@ -219,13 +219,15 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 List<string> columnNames = new List<string>();
                 List<Column> bussinesColumns = new List<Column>();
                 List<ColumnDalFile> columsToBeAdded = columnWrapper.Columns.FindAll(column => column.Email == user.Email);
-                columsToBeAdded.Sort((a, b) => (a.Status.CompareTo(b.Status)));
+
+                columsToBeAdded.Sort((a, b) => (a.OrderID.CompareTo(b.OrderID)));
+
                 foreach (var column in columsToBeAdded)
                 {
                     boardNames.Add(column.Name);
                     columnNames.Add(column.Name);
 
-                    List<TaskDalFile> tasksToBeAdded = taskWrapper.Tasks.FindAll(task => task.Email == column.Email && task.Status == column.Status);
+                    List<TaskDalFile> tasksToBeAdded = taskWrapper.Tasks.FindAll(task => task.Email == column.Email && task.ColumnID == column.OrderID);
                     List<Task> bussinesTasks = new List<Task>();
                     foreach (var task in tasksToBeAdded)
                     {

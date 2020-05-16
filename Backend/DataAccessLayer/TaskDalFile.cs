@@ -14,7 +14,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     public class TaskDalFile: DalObject<TaskDalFile>, ITaskDAL
     {
 
-        public ColumnStatus Status { get; set; }
+        public int ColumnID { get; set; }
         public int Id { get; set ; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -22,7 +22,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public DateTime Creationtime { get; set; }
         public DateTime DueDate { get; set; }
         public TaskDalFile() { }
-        public TaskDalFile(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate,ColumnStatus status)
+        public TaskDalFile(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate,int columnID)
         {
             Id = id;
             Title = title;
@@ -30,7 +30,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             Email = email;
             Creationtime = creationtime;
             DueDate = dueDate;
-            Status = status;
+            ColumnID = columnID;
         }
         override
         public void Save()
@@ -41,7 +41,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         {
             File.Delete(GetFileName(Email, Id));
         }
-        public bool Load(string email,ColumnStatus status,int id)
+        public bool Load(string email,int columnID, int id)
         {
             TaskDalFile toLoad = null;
             try

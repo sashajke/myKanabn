@@ -13,46 +13,43 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
     public class ColumnDalFile : DalObject<ColumnDalFile>,IColumnDAL
     {
 
-        public ColumnStatus Status { get; set; }
         public string Name { get; set ; }
         public int Limit { get; set; }
         public string Email { get; set; }
+        public int OrderID { get; set ; }
 
         public ColumnDalFile()
         {
         }
-        public ColumnDalFile(int limit,string email, ColumnStatus status)
+        public ColumnDalFile(int limit,string email, int orderID,string name)
         {
             Email = email;
-            switch (status)
-            {
-                case ColumnStatus.Backlog:
-                    this.Name = "backlog";
-                    break;
-                case ColumnStatus.InProgress:
-                    this.Name = "in progress";
-                    break;
-                case ColumnStatus.Done:
-                    this.Name = "done";
-
-                    break;
-                default:
-                    break;
-            }
+            Name = name;
             Limit = limit;
-            Status = status;
+            OrderID = orderID;
         }
 
         override public void Save()
         {
-            ToJson(this, GetFileName(Email,Status));
+            ToJson(this, GetFileName(Email, OrderID));
         }
-        public bool Load(string email, ColumnStatus status)
+
+
+        public void Remove()
+        {
+            File.Delete(GetFileName(Email, OrderID));
+        }
+
+        public void RemoveAll()
+        {
+
+        }
+        public bool Load(string email, int orderID)
         {
             ColumnDalFile toLoad = null;
             try
             {
-                toLoad = FromJson<ColumnDalFile>(GetFileName(email,status));
+                toLoad = FromJson<ColumnDalFile>(GetFileName(email,orderID));
 
             }
             catch (Exception ee)
@@ -64,16 +61,16 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             Email = toLoad.Email;
             Name = toLoad.Name;
             Limit = toLoad.Limit;
-            Status = toLoad.Status;
+            OrderID = toLoad.OrderID;
             return true;
         }
-        private string GetFileName(string email,ColumnStatus status)
+        private string GetFileName(string email,int orderID)
         {
             string dir = Directory.GetCurrentDirectory();
             dir = Path.Combine(dir, "Columns");
             if (!Directory.Exists(dir))
                 Directory.CreateDirectory(dir);
-            return Path.Combine(dir, email +"_"+ status.ToString()+ ".json");
+            return Path.Combine(dir, email +"_"+ orderID+ ".json");
         }
     }
 }

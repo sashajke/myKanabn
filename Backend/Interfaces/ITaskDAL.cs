@@ -10,6 +10,13 @@ namespace IntroSE.Kanban.Backend.Interfaces
     public interface ITaskDAL
     {
         void Save();
-        bool Load(string email, ColumnStatus status, int id);
+        bool Load(string email, int columnID, int id);
+        DateTime Creationtime { get; set; }
+        DateTime DueDate { get; set; }
+        int Id { get; set; }
+        int ColumnID { get; set; }
+        string Email { get; set; }
+        string Title { get; set; }
+        string Description { get; set; }
     }
 }

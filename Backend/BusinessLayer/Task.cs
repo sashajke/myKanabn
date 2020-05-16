@@ -16,7 +16,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         private int id;
         private string title;
         private string description;
-        private ColumnStatus status = ColumnStatus.Backlog; // need to change
+        private int columnID; // need to change
         private string email;
         private DateTime creationtime;
         private DateTime dueDate;
@@ -29,6 +29,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.email = email;
             this.creationtime = DateTime.Now;
             this.dueDate = dueDate;
+            this.columnID = 0;
             save(); 
         }
         public Task() { }
@@ -55,14 +56,14 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         }
         public string Description { get => description;}
         public string Title { get => title;}
-        public ColumnStatus Status
+        public int ColumnID
         {
-            get => status;
+            get => columnID;
             set
             {
-                if(!status.Equals(value))
+                if(!(columnID==value))
                 {
-                    status = value;
+                    columnID = value;
                     save();
                 }
                 
@@ -95,7 +96,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         }
         public ITaskDAL ToDalObject()
         {
-            return Factory.CreateTaskDalImpl(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
+            return Factory.CreateTaskDalImpl(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.columnID);
           
             // return new DataAccessLayer.TaskDalFile(this.id, this.title, this.description, this.email, this.creationtime, this.dueDate, this.status);
         }
@@ -103,7 +104,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         {
             this.ToDalObject().Save();
         }
-        public void Load(DataAccessLayer.TaskDalFile taskWrap)
+        public void Load(ITaskDAL taskWrap)
         {
             this.creationtime = taskWrap.Creationtime;
             this.description = taskWrap.Description;
@@ -111,10 +112,11 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.id = taskWrap.Id;
             this.email = taskWrap.Email;
             this.title = taskWrap.Title;
+            this.columnID = taskWrap.ColumnID;
         }
         public override string ToString()
         {
-            return $"Creation={this.creationtime} ID ={this.id} Status={this.status.ToString()}";
+            return $"Creation={this.creationtime} ID ={this.id} Column ID={this.columnID.ToString()}";
         }
     }
 }

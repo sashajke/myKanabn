@@ -9,6 +9,11 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
     class UserDalDB : IUserDAL
     {
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Nickname { get; set; }
+        public bool IsLogged { get; set; }
+
         public bool Load(string email)
         {
             throw new NotImplementedException();

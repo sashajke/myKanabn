@@ -10,10 +10,14 @@ namespace IntroSE.Kanban.Backend.Interfaces
     public interface IColumnDAL
     {
         void Save();
-        bool Load(string email, ColumnStatus status);    
+        bool Load(string email, int id);    
         string Email { get; set; }
-        ColumnStatus Status { get; set; }
+        string Name { get; set; }
         int Limit { get; set; }
         int OrderID { get; set; }
+        void Remove();
+        void RemoveAll();
+        
+           
     }
 }

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using IntroSE.Kanban.Backend.Common;
 using IntroSE.Kanban.Backend.DataAccessLayer;
+using IntroSE.Kanban.Backend.Interfaces;
+
 namespace IntroSE.Kanban.Backend.BusinessLayer
 {
     public class Board
@@ -27,7 +29,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.columns = new List<Column>();
             for (int i = 0; i < 3; i++)
             {
-                Column col = new Column((ColumnStatus)i, email,i);
+                Column col = new Column(email,i);
                 this.columns.Add(col);
                 this.columnNames.Add((col.Name));
             }
@@ -87,7 +89,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 throw new Exception("illegal column id ");
 
             if (columnOrdinal == Columns.Count - 1)
-                throw new Exception("can't advance tasks that under 'done' column ");
+                throw new Exception("can't advance tasks that are in the last column ");
             if (columns[columnOrdinal + 1].Limit == columns[columnOrdinal + 1].TaskByID.Count)
                 throw new Exception("the next column have reached to the limit");
             Task taskToRemove = columns[columnOrdinal].removeTask(taskID);
@@ -95,13 +97,37 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         }
         public void RemoveColumn(int coloOrdinal)
         {
+            Column columToRemove = Columns[coloOrdinal];
+            columToRemove.ToDalObject().Remove();
+            int destinationColumn = -1;
+            bool moveRight = false;
+            if (coloOrdinal != 0) // move left
+            {
+                destinationColumn = coloOrdinal - 1;
+            }
+            else // move right
+            {
+                moveRight = true;
+                if (Columns.Count != 1)
+                    destinationColumn = coloOrdinal + 1;
+            }
+            if (destinationColumn != -1)
+            {
+                for (int i=0;i<columToRemove.TaskByID.Count;i++)
+                {
+                    Task taskToRemove = columToRemove.removeTask(columToRemove.TaskByID[i].Id);
+                    columns[destinationColumn].addTask(taskToRemove); 
+                }
+            }          
             Columns.RemoveAt(coloOrdinal);
             reOrderColumns();
+            // need to move tasks to the left or right
            
         }
-        public Column AddColumn(int coloOrdinal)
+        public Column AddColumn(int coloOrdinal,string name)
         {
-            Column toAdd = new Column(getStatusByID(coloOrdinal),email,coloOrdinal);
+            Column toAdd = new Column(email,coloOrdinal);
+            toAdd.Name = name;
             Columns.Insert(coloOrdinal, toAdd);
             reOrderColumns();
             return toAdd;
@@ -109,8 +135,13 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         private void reOrderColumns()
         {
             for (int i = 0; i < Columns.Count; i++)
-            {
+            {   
                 Columns[i].OrderID = i;
+
+                foreach(var task in Columns[i].TaskByID)
+                {
+                    task.ColumnID = i;
+                }
             }
         }
 
@@ -134,19 +165,19 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             reOrderColumns();
             return toMove;
         }
-        private ColumnStatus getStatusByID(int coloOrdinal)
-        {
-            switch (coloOrdinal)
-            {
-                case 0:
-                    return ColumnStatus.Backlog;
-                case 1:
-                    return ColumnStatus.InProgress;
-                case 2:
-                    return ColumnStatus.Done;
-                default:
-                    return ColumnStatus.Unknown;
-            }
-        }
+        //private ColumnStatus getStatusByID(int coloOrdinal)
+        //{
+        //    switch (coloOrdinal)
+        //    {
+        //        case 0:
+        //            return ColumnStatus.Backlog;
+        //        case 1:
+        //            return ColumnStatus.InProgress;
+        //        case 2:
+        //            return ColumnStatus.Done;
+        //        default:
+        //            return ColumnStatus.Unknown;
+        //    }
+        //}
     }
 }

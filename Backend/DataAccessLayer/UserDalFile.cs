@@ -22,6 +22,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public string Password { get; set; }
         public string Nickname { get; set; }
         public bool IsLogged { get; set; }
+        //string IUserDAL.Password { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //string IUserDAL.Nickname { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //string IUserDAL.IsLogged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //string IUserDAL.Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         override
         public void Save()

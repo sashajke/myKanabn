@@ -14,70 +14,52 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         private string name;
         private int limit;
         private List<Task> taskByID;
-        private ColumnStatus status;
         private string email;
         private int orderID;
 
-        public Column(ColumnStatus status,string email,int id=-1)
+        public Column(string email,int id=-1)
         {
             this.email = email;
             this.limit = -1;
             this.taskByID = new List<Task>();
             this.orderID = id;
-            switch (status)
+            switch (orderID)
             {
-                case ColumnStatus.Backlog:
+                case 0:
                     this.name = "backlog";
                     break;
-                case ColumnStatus.InProgress:
+                case 1:
                     this.name = "in progress";
                     break;
-                case ColumnStatus.Done:
+                case 2:
                     this.name = "done";
 
                     break;
-                case ColumnStatus.Unknown:
+                default:
                     this.name = "unknown";
                     break;
-
-                default:
-                    break;
             }
-            this.status = status;
             save();
         }
+        
         public Column()
         {
             this.email = "";
             this.limit = -1;
             this.taskByID = new List<Task>();
             this.orderID = -1;
-            this.status = ColumnStatus.Unknown;
+            this.name = "";
         }
         public Column(IColumnDAL toCopy,List<Task> tasks)
         {
             if (toCopy == null)
                 return;
             this.email = toCopy.Email;
-            switch (toCopy.Status)
-            {
-                case ColumnStatus.Backlog:
-                    this.name = "backlog";
-                    break;
-                case ColumnStatus.InProgress:
-                    this.name = "in progress";
-                    break;
-                case ColumnStatus.Done:
-                    this.name = "done";
-
-                    break;
-                default:
-                    break;
-            }
+           
             this.orderID = toCopy.OrderID;
             this.limit = toCopy.Limit;
-            this.status = toCopy.Status;
             this.taskByID = tasks;
+            this.name = toCopy.Name;
         }
         public int OrderID
         {
@@ -104,7 +86,18 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             }
         }
         internal List<Task> TaskByID { get => taskByID; }
-        public string Name { get => name; }
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (name != value && !string.IsNullOrEmpty(value))
+                {
+                    name = value;
+                    save();
+                }
+            }
+        }
 
         //updates the limit
         public bool updateLimit(int lim)
@@ -129,7 +122,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 if (this.limit == this.taskByID.Count)
                     throw new Exception("column has reached its max tasks");
             }
-            newTask.Status = status;
+            newTask.ColumnID = orderID;
             taskByID.Add(newTask);
             return true;
         }
@@ -140,6 +133,8 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             taskByID.Remove(GetTaskByID(taskID));
             return deleted;
         }
+       
+
         public Task GetTaskByID(int ID)
         {
             foreach (Task val in taskByID)
@@ -152,7 +147,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         //override
         public IColumnDAL ToDalObject()
         {
-            return Factory.CreateColumnDalImpl(this.limit, this.email, this.status);
+            return Factory.CreateColumnDalImpl(this.limit, this.email, this.OrderID,this.Name);
             //return new DataAccessLayer.ColumnDalFile(this.limit,this.email, this.status);
         }
         public void save()

@@ -10,7 +10,17 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
     class TaskDalDB : ITaskDAL
     {
-        public bool Load(string email, ColumnStatus status, int id)
+
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Email { get; set; }
+        public DateTime Creationtime { get; set; }
+        public DateTime DueDate { get; set; }
+        public int ColumnID { get; set; }
+         
+
+        public bool Load(string email, int orderId, int id)
         {
             throw new NotImplementedException();
         }

@@ -26,7 +26,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.nickname = nickname;
         }
         public User() { }
-        public User(UserDalFile user, Board board, List<string> columnNames)
+        public User(IUserDAL user, Board board, List<string> columnNames)
         {
             _isLogged = user.IsLogged;
             _board = board;

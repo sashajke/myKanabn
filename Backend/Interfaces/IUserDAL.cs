@@ -10,5 +10,9 @@ namespace IntroSE.Kanban.Backend.Interfaces
     {
         void Save();
         bool Load(string email);
+        string Password { get; set; }
+        string Nickname { get; set; }
+        bool IsLogged { get; set; }
+        string Email { get; set; }
     }
 }
