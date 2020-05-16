@@ -59,5 +59,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
                 Directory.CreateDirectory(dir);
             return Path.Combine(dir, email + ".json");
         }
+        public void Remove()
+        {
+            File.Delete(GetFileName(this.Email));
+        }
+    
     }
 }

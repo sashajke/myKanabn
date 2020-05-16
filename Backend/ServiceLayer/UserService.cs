@@ -20,6 +20,21 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             _UserController.LoadData();
             return new Response();
         }
+
+        public Response DeleteData()
+        {
+            try
+            {
+                _UserController.DeleteData();
+                return new Response();
+            }
+            catch(Exception ee)
+            {
+                return new Response(ee.Message);
+            }
+           
+            
+        }
         public Response Register(string email, string password, string nickname)
         {
             Response toReturn;

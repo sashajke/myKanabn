@@ -17,7 +17,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         {
             Users = new List<UserDalFile>();
         }
-
+        public void RemoveAll()
+        {
+            File.Delete(GetDirectory());
+        }
         public void SaveAsSeperateFiles()
         {
             foreach (var item in Users)

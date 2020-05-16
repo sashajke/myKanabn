@@ -98,7 +98,11 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         public void RemoveColumn(int coloOrdinal)
         {
             Column columToRemove = Columns[coloOrdinal];
-            columToRemove.ToDalObject().Remove();
+            //columToRemove.ToDalObject().Remove();
+            foreach (var item in Columns)
+            {
+                item.ToDalObject().Remove();
+            }
             int destinationColumn = -1;
             bool moveRight = false;
             if (coloOrdinal != 0) // move left
@@ -118,7 +122,8 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                     Task taskToRemove = columToRemove.removeTask(columToRemove.TaskByID[i].Id);
                     columns[destinationColumn].addTask(taskToRemove); 
                 }
-            }          
+            }
+            
             Columns.RemoveAt(coloOrdinal);
             reOrderColumns();
             // need to move tasks to the left or right
@@ -137,7 +142,6 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             for (int i = 0; i < Columns.Count; i++)
             {   
                 Columns[i].OrderID = i;
-
                 foreach(var task in Columns[i].TaskByID)
                 {
                     task.ColumnID = i;

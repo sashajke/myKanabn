@@ -201,6 +201,33 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         //    columnWrapper.SaveAsSeperateFiles();
         //    userWrapepr.SaveAsSeperateFiles();
         //}
+        public void DeleteData()
+        {
+
+            //DataAccessLayer.TaskControllerWrapper taskWrapper = new TaskControllerWrapper();
+            //DataAccessLayer.ColumnControllerWrapper columnWrapper = new ColumnControllerWrapper();
+            //DataAccessLayer.userControllerWrapper userWrapepr = new userControllerWrapper();
+            //taskWrapper.RemoveAll();
+            //columnWrapper.RemoveAll();
+            //userWrapepr.RemoveAll();
+            foreach (var user in users) // remove running data
+            {
+                Board userBoard = user.Board;
+                foreach (var Column in userBoard.Columns)
+                {
+                    foreach (var task in Column.TaskByID)
+                    {
+                        task.ToDalObject().Remove();
+                    }
+                    Column.TaskByID.Clear();
+                    Column.ToDalObject().Remove();
+                }
+                userBoard.ColumnNames.Clear();
+                userBoard.Columns.Clear();
+                user.ToDalObject().Remove();
+            }
+            users.Clear();
+        }
         public void LoadAll()
         {
             if (users == null)

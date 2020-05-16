@@ -14,5 +14,6 @@ namespace IntroSE.Kanban.Backend.Interfaces
         string Nickname { get; set; }
         bool IsLogged { get; set; }
         string Email { get; set; }
+        void Remove();
     }
 }

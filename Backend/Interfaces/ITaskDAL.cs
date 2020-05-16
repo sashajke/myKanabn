@@ -18,5 +18,6 @@ namespace IntroSE.Kanban.Backend.Interfaces
         string Email { get; set; }
         string Title { get; set; }
         string Description { get; set; }
+        void Remove();
     }
 }

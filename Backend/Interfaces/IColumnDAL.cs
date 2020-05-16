@@ -15,9 +15,6 @@ namespace IntroSE.Kanban.Backend.Interfaces
         string Name { get; set; }
         int Limit { get; set; }
         int OrderID { get; set; }
-        void Remove();
-        void RemoveAll();
-        
-           
+        void Remove();          
     }
 }

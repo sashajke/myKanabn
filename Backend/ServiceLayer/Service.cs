@@ -41,7 +41,14 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         ///<summary>Remove all persistent data.</summary>
         public Response DeleteData()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _UserService.DeleteData();
+            }
+            catch (Exception ee)
+            {
+                return new Response("didn't execute LoadData function");
+            }
         }
 
 

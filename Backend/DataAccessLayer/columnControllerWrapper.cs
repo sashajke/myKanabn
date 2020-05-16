@@ -24,6 +24,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
                 item.Save();                
             }
         }
+        public void RemoveAll()
+        {
+            File.Delete(GetDirectory());
+        }
         public bool LoadAsSeperateFiles()
         {
             if (Columns == null)

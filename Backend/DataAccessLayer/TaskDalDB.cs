@@ -29,5 +29,9 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         {
             throw new NotImplementedException();
         }
+        public void Remove()
+        {
+
+        }
     }
 }

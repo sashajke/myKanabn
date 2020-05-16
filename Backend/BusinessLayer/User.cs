@@ -10,7 +10,6 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 {
     public class User
     {
-        private List<string> columnNames;
         private bool _isLogged;
         private Board _board;
         private string email;
@@ -33,9 +32,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             this.email = user.Email;
             this.password = user.Password;
             this.nickname = user.Nickname;
-            this.columnNames = columnNames;
         }
-        public List<string> ColumnNames { get => columnNames; set => columnNames = value; }
         public bool IsLogged
         {
             get => _isLogged;

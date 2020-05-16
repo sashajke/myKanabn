@@ -21,6 +21,11 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         {
             
         }
+
+        public void RemoveAll()
+        {
+            File.Delete(GetDirectory());
+        }
         public void SaveAsSeperateFiles()
         {
             foreach (var item in Tasks)
