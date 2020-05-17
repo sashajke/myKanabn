@@ -14,6 +14,14 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public string Nickname { get; set; }
         public bool IsLogged { get; set; }
 
+        public UserDalDB(string email,string password,string nickname,bool isLogged)
+        {
+            this.Email = email;
+            this.Password = password;
+            this.Nickname = nickname;
+            this.IsLogged = isLogged;
+        }
+
         public bool Load(string email)
         {
             throw new NotImplementedException();

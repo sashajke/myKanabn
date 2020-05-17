@@ -19,7 +19,15 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public DateTime DueDate { get; set; }
         public int ColumnID { get; set; }
          
-
+        public TaskDalDB(int id,string title, string desc, string email,DateTime creation,DateTime due,int ColId)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Description = desc;
+            this.Email = email;
+            this.Creationtime = creation;
+            this.DueDate = due;
+        }
         public bool Load(string email, int orderId, int id)
         {
             throw new NotImplementedException();

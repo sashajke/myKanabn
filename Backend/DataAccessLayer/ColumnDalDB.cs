@@ -15,6 +15,14 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         public int OrderID { get; set ; }
         public string Name { get ; set ; }
 
+        public ColumnDalDB(string email, int id, int lim,string name)
+        {
+            this.Email = email;
+            this.OrderID = id;
+            this.Limit = lim;
+            this.Name = name;
+        }
+
         public bool Load(string email, int columnID)
         {
             throw new NotImplementedException();

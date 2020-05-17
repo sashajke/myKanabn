@@ -1,5 +1,7 @@
 ﻿using IntroSE.Kanban.Backend.BusinessLayer;
 using System;
+using System.Configuration;
+using log4net.Config;
 
 namespace IntroSE.Kanban.Backend.ServiceLayer
 {
@@ -14,6 +16,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
     /// </summary>
     public class Service : IService
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private UserService _UserService;
         private TaskService _TaskService;
         private BoardService _BoardService;
@@ -22,6 +25,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         /// </summary>
         public Service()
         {
+            log.Debug("initalized service class");
         }
 
         /// <summary>        
@@ -34,6 +38,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             _UserService = new UserService(us);
             _TaskService = new TaskService(us);
             _BoardService = new BoardService(us);
+            log.Debug("loaded data");
             return _UserService.loadData();
         }
 
@@ -43,10 +48,13 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
         {
             try
             {
+                
                 return _UserService.DeleteData();
+                
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -67,6 +75,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
 
@@ -88,6 +97,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<User>("didn't execute LoadData function");
             }
         }
@@ -106,6 +116,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -124,6 +135,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Board>("didn't execute LoadData function");
             }
         }
@@ -144,6 +156,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -165,6 +178,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Task>("didn't execute LoadData function");
             }
         }
@@ -186,6 +200,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -207,6 +222,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -228,6 +244,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -248,6 +265,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -268,6 +286,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Column>("didn't execute LoadData function");
             }
         }
@@ -288,6 +307,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Column>("didn't execute LoadData function");
             }
         }
@@ -307,6 +327,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch(Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response("didn't execute LoadData function");
             }
         }
@@ -327,6 +348,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Column>("didn't execute LoadData function");
             }
 
@@ -347,6 +369,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Column>("didn't execute LoadData function");
             }
 
@@ -367,6 +390,7 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
             }
             catch (Exception ee)
             {
+                log.Warn("didn't execute load data function");
                 return new Response<Column>("didn't execute LoadData function");
             }
         }
