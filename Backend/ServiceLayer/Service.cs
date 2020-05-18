@@ -2,6 +2,8 @@
 using System;
 using System.Configuration;
 using log4net.Config;
+using System.IO;
+
 
 namespace IntroSE.Kanban.Backend.ServiceLayer
 {
@@ -17,6 +19,8 @@ namespace IntroSE.Kanban.Backend.ServiceLayer
     public class Service : IService
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+
         private UserService _UserService;
         private TaskService _TaskService;
         private BoardService _BoardService;

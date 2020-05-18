@@ -73,7 +73,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             if (!validUser(check))
                 return null;
             Board userBoard = check.Board;
-            return userBoard.AddColumn(columnOrdinal,Name); // need to implement
+            return userBoard.AddColumn(columnOrdinal,Name); 
         }
         public Column MoveColumnRight(string email, int columnOrdinal)
         {
@@ -82,7 +82,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                 return null;
             Board userBoard = check.Board;
             return userBoard.MoveColumnRight(columnOrdinal);
-                // need to implement
+                
         }
         public Column MoveColumnLeft(string email, int columnOrdinal)
         {
