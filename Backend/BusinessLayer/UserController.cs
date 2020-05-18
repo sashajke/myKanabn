@@ -39,7 +39,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                     throw new Exception("email or password is incorrect");
                 userToLogin.IsLogged = true;
                 currentUser = userToLogin;
-                userToLogin.save();
+                //userToLogin.save();
                 return userToLogin;
             }
             else

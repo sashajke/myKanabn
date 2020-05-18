@@ -14,8 +14,8 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
 
         public static IUserDAL CreateUserDalImpl(string email, string password, string nickname, bool isLogged)
         {
-            if (CurrentConfig == SavingSystem.File)
-                return new UserDalFile(email,password,nickname,isLogged);
+            //if (CurrentConfig == SavingSystem.File)
+            //    return new UserDalFile(email,password,nickname,isLogged);
             return new UserDalDB(email, password, nickname, isLogged);
         }
         public static ITaskDAL CreateTaskDalImpl(int id, string title, string description, string email, DateTime creationtime, DateTime dueDate, int columnID)
