@@ -27,6 +27,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             var serObject = JsonConvert.SerializeObject(t);
             File.WriteAllText(path, serObject);
         }
-        public abstract void Save();
+        //public abstract void Save();
     }
 }

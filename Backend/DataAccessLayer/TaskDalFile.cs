@@ -32,7 +32,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             DueDate = dueDate;
             ColumnID = columnID;
         }
-        override
         public void Save()
         {
             ToJson(this, GetFileName(Email,Id));

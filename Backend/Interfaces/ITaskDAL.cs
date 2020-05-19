@@ -11,8 +11,8 @@ namespace IntroSE.Kanban.Backend.Interfaces
     {
         void Save();
         bool Load(string email, int columnID, int id);
-        DateTime Creationtime { get; set; }
-        DateTime DueDate { get; set; }
+        string Creationtime { get; set; }
+        string DueDate { get; set; }
         int Id { get; set; }
         int ColumnID { get; set; }
         string Email { get; set; }

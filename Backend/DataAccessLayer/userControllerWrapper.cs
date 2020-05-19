@@ -1,5 +1,7 @@
-﻿using System;
+﻿using IntroSE.Kanban.Backend.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,38 +9,37 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
-    public class userControllerWrapper : DalObject<userControllerWrapper>
+    public class userControllerWrapper : DalObject<userControllerWrapper>, IDALController<IUserDAL>
     {
-
-
-        public List<UserDalFile> Users { get ; set ; }
+        
+        public List<IUserDAL> Items { get ; set ; }
 
         public userControllerWrapper()
         {
-            Users = new List<UserDalFile>();
+            Items = new List<IUserDAL>();
         }
         public void RemoveAll()
         {
             File.Delete(GetDirectory());
         }
-        public void SaveAsSeperateFiles()
+        public void Save()
         {
-            foreach (var item in Users)
+            foreach (var item in Items)
             {
                 item.Save();                
             }
         }
-        public bool LoadAsSeperateFiles()
+        public bool Load()
         {
-            if (Users == null)
-                Users = new List<UserDalFile>();
-            Users.Clear();
+            if (Items == null)
+                Items = new List<IUserDAL>();
+            Items.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
                     UserDalFile toLoad = FromJson<UserDalFile>(item);
-                    Users.Add(toLoad);
+                    Items.Add(toLoad);
                 }
                 catch(Exception ee)
                 {
@@ -60,11 +61,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             string dir = Directory.GetCurrentDirectory();
             dir = Path.Combine(dir, "Users");
             return dir;
-        }
-
-        public override void Save()
-        {
-            //throw new NotImplementedException();
         }
     }
 }

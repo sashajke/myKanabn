@@ -1,5 +1,6 @@
 ﻿using IntroSE.Kanban.Backend.Common;
 using IntroSE.Kanban.Backend.DataAccessLayer;
+using IntroSE.Kanban.Backend.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +19,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
 
         public UserController()
         {
-            Factory.CurrentConfig = SavingSystem.File;
+            Factory.CurrentConfig = SavingSystem.DB;
             this.users = new List<User>();
             this.currentUser = null;
         }
@@ -232,20 +233,20 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
         {
             if (users == null)
                 users = new List<User>();
-            users.Clear();      
-            DataAccessLayer.TaskControllerWrapper taskWrapper = new TaskControllerWrapper();
-            DataAccessLayer.ColumnControllerWrapper columnWrapper = new ColumnControllerWrapper();
-            DataAccessLayer.userControllerWrapper userWrapepr = new userControllerWrapper();
-            taskWrapper.LoadAsSeperateFiles();
-            columnWrapper.LoadAsSeperateFiles();
-            userWrapepr.LoadAsSeperateFiles();
-            foreach (var user in userWrapepr.Users)
+            users.Clear();
+            IDALController<ITaskDAL> taskWrapper = Factory.CreateTaskController();
+            IDALController<IColumnDAL> columnWrapper = Factory.CreateColumnController();
+            IDALController<IUserDAL> userWrapepr = Factory.CreateUserController();
+            taskWrapper.Load();
+            columnWrapper.Load();
+            userWrapepr.Load();
+            foreach (var user in userWrapepr.Items)
             {
                 List<string> boardNames = new List<string>();
 
                 List<string> columnNames = new List<string>();
                 List<Column> bussinesColumns = new List<Column>();
-                List<ColumnDalFile> columsToBeAdded = columnWrapper.Columns.FindAll(column => column.Email == user.Email);
+                List<IColumnDAL> columsToBeAdded = columnWrapper.Items.FindAll(column => column.Email == user.Email);
 
                 columsToBeAdded.Sort((a, b) => (a.OrderID.CompareTo(b.OrderID)));
 
@@ -254,7 +255,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
                     boardNames.Add(column.Name);
                     columnNames.Add(column.Name);
 
-                    List<TaskDalFile> tasksToBeAdded = taskWrapper.Tasks.FindAll(task => task.Email == column.Email && task.ColumnID == column.OrderID);
+                    List<ITaskDAL> tasksToBeAdded = taskWrapper.Items.FindAll(task => task.Email == column.Email && task.ColumnID == column.OrderID);
                     List<Task> bussinesTasks = new List<Task>();
                     foreach (var task in tasksToBeAdded)
                     {

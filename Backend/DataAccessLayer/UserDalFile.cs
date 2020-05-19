@@ -27,7 +27,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         //string IUserDAL.IsLogged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         //string IUserDAL.Email { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        override
         public void Save()
         {
             ToJson(this, GetFileName(Email));

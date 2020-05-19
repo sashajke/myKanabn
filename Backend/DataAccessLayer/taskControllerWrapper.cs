@@ -1,49 +1,45 @@
-﻿using System;
+﻿using IntroSE.Kanban.Backend.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
-    public class TaskControllerWrapper : DalObject<userControllerWrapper>
+    public class TaskControllerWrapper : DalObject<userControllerWrapper>, IDALController<ITaskDAL>
     {
 
 
-        public List<TaskDalFile> Tasks { get ; set ; }
+        public List<ITaskDAL> Items { get ; set ; }
 
         public TaskControllerWrapper()
         {
-            Tasks = new List<TaskDalFile>();
-        }
-        public override void Save()
-        {
-            
+            Items = new List<ITaskDAL>();
         }
 
         public void RemoveAll()
         {
             File.Delete(GetDirectory());
         }
-        public void SaveAsSeperateFiles()
+        public void Save()
         {
-            foreach (var item in Tasks)
+            foreach (var item in Items)
             {
                 item.Save();                
             }
         }
-        public bool LoadAsSeperateFiles()
+        public bool Load()
         {
-            if (Tasks == null)
-                Tasks = new List<TaskDalFile>();
-            Tasks.Clear();
+            if (Items == null)
+                Items = new List<ITaskDAL>();
+            Items.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
                     TaskDalFile toLoad = FromJson<TaskDalFile>(item);
-                    Tasks.Add(toLoad);
+                    Items.Add(toLoad);
                 }
                 catch(Exception ee)
                 {

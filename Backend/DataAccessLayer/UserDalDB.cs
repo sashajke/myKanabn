@@ -26,7 +26,10 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             this.Nickname = nickname;
             this.IsLogged = isLogged;
         }
+        public UserDalDB()
+        {
 
+        }
         public bool Load(string email)
         {
             throw new NotImplementedException();
@@ -87,7 +90,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             }
             
         }
-        public bool Remove(string email)
+        public void Remove()
         {
             int res = -1;
             if (!checkIfDBexists(_dbName))
@@ -119,7 +122,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
                     connection.Close();
                 }
             }
-            return res >0;
         }
         private string GetConnectionString()
         {

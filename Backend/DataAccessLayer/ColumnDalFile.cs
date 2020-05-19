@@ -29,7 +29,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             OrderID = orderID;
         }
 
-        override public void Save()
+         public void Save()
         {
             ToJson(this, GetFileName(Email, OrderID));
         }

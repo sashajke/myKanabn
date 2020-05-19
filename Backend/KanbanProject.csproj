@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -76,19 +79,23 @@
     <Compile Include="BusinessLayer\UserController.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="DataAccessLayer\BoardDalDB.cs" />
+    <Compile Include="DataAccessLayer\ColumnControllerDB.cs" />
     <Compile Include="DataAccessLayer\columnControllerWrapper.cs" />
     <Compile Include="DataAccessLayer\ColumnDalDB.cs" />
     <Compile Include="DataAccessLayer\ColumnDalFile.cs" />
     <Compile Include="DataAccessLayer\DalObject.cs" />
     <Compile Include="DataAccessLayer\Factory.cs" />
+    <Compile Include="DataAccessLayer\TaskControllerDB.cs" />
     <Compile Include="DataAccessLayer\taskControllerWrapper.cs" />
     <Compile Include="DataAccessLayer\TaskDalDB.cs" />
     <Compile Include="DataAccessLayer\TaskDalFile.cs" />
+    <Compile Include="DataAccessLayer\UserControllerDB.cs" />
     <Compile Include="DataAccessLayer\UserDalDB.cs" />
     <Compile Include="DataAccessLayer\UserDalFile.cs" />
     <Compile Include="DataAccessLayer\userControllerWrapper.cs" />
     <Compile Include="Interfaces\IBoardDAL.cs" />
     <Compile Include="Interfaces\IColumnDAL.cs" />
+    <Compile Include="Interfaces\IDALController.cs" />
     <Compile Include="Interfaces\ITaskDAL.cs" />
     <Compile Include="Interfaces\IUserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

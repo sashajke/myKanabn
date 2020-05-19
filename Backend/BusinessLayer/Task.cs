@@ -33,7 +33,7 @@ namespace IntroSE.Kanban.Backend.BusinessLayer
             save(); 
         }
         public Task() { }
-        public Task(DataAccessLayer.TaskDalFile toCopy)
+        public Task(ITaskDAL toCopy)
         {
             if (toCopy == null)
                 return;

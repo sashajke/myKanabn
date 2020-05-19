@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntroSE.Kanban.Backend.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace IntroSE.Kanban.Backend.DataAccessLayer
 {
-    public class ColumnControllerWrapper : DalObject<userControllerWrapper>
+    public class ColumnControllerWrapper : DalObject<userControllerWrapper>,IDALController<IColumnDAL>
     {
 
 
-        public List<ColumnDalFile> Columns { get ; set ; }
+        public List<IColumnDAL> Items { get ; set ; }
 
         public ColumnControllerWrapper()
         {
-            Columns = new List<ColumnDalFile>();
+            Items = new List<IColumnDAL>();
         }
-        public void SaveAsSeperateFiles()
+        public void Save()
         {
-            foreach (var item in Columns)
+            foreach (var item in Items)
             {
                 item.Save();                
             }
@@ -28,17 +29,17 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
         {
             File.Delete(GetDirectory());
         }
-        public bool LoadAsSeperateFiles()
+        public bool Load()
         {
-            if (Columns == null)
-                Columns = new List<ColumnDalFile>();
-            Columns.Clear();
+            if (Items == null)
+                Items = new List<IColumnDAL>();
+            Items.Clear();
             foreach (var item in Directory.GetFiles(GetDirectory()))
             {
                 try
                 {
                     ColumnDalFile toLoad = FromJson<ColumnDalFile>(item);
-                    Columns.Add(toLoad);
+                    Items.Add(toLoad);
                 }
                 catch(Exception ee)
                 {
@@ -52,11 +53,6 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             string dir = Directory.GetCurrentDirectory();
             dir = Path.Combine(dir, "Columns");
             return dir;
-        }
-
-        public override void Save()
-        {
-            //throw new NotImplementedException();
         }
     }
 }
