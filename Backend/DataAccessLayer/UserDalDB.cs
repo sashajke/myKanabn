@@ -87,9 +87,39 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
             }
             
         }
-        public void Remove()
+        public bool Remove(string email)
         {
+            int res = -1;
+            if (!checkIfDBexists(_dbName))
+                throw new Exception($"database {_dbName} non existent"); // add log
+            using (var connection = new SQLiteConnection(GetConnectionString()))
+            {
+                if (!checkIfTableExists(_tableName))
+                    throw new Exception($"table {_tableName} non existent");
+                SQLiteCommand command = new SQLiteCommand
+                {
+                    Connection = connection,
+                    CommandText = $"DELETE * FROM {_tableName} WHERE Email=@emailVal"
+                };
+                try
+                {
+                    connection.Open();
+                    SQLiteParameter emailParam = new SQLiteParameter("@emailVal", this.Email);
+                    command.Parameters.Add(emailParam);
+                    command.Prepare();
+                    res = command.ExecuteNonQuery();
+                }
+                catch(Exception ee)
+                {
 
+                }
+                finally
+                {
+                    command.Dispose();
+                    connection.Close();
+                }
+            }
+            return res >0;
         }
         private string GetConnectionString()
         {
@@ -123,7 +153,7 @@ namespace IntroSE.Kanban.Backend.DataAccessLayer
                 }
                 catch (Exception ee)
                 {
-
+                    return false;
                 }
                 finally
                 {
